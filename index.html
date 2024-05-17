@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Combinar listas CSV</title>
+   <style>
+      textarea {
+         width: 100%;
+         height: 100px;
+         margin-bottom: 10px;
+      }
+
+      button {
+         display: block;
+         margin-bottom: 10px;
+      }
+   </style>
+</head>
+
+<body>
+   <h1>Combinar listas CSV</h1>
+   <textarea id="textarea1" placeholder="Pega la primera lista aquí..."></textarea>
+   <textarea id="textarea2" placeholder="Pega la segunda lista aquí..."></textarea>
+   <button onclick="combineLists()">Combinar Listas</button>
+   <textarea id="result" placeholder="El resultado aparecerá aquí..." readonly></textarea>
+
+   <script>
+      function combineLists() {
+         // Obtener las listas de los textarea
+         const list1 = document.getElementById('textarea1').value.split('\n').map(item => item.trim()).filter(item => item !== '');
+         const list2 = document.getElementById('textarea2').value.split('\n').map(item => item.trim()).filter(item => item !== '');
+
+         // Combinar y eliminar duplicados usando un Set
+         const combinedSet = new Set([...list1, ...list2]);
+
+         // Convertir el Set de nuevo a un array y luego a una cadena con saltos de línea
+         const combinedList = Array.from(combinedSet).join('\n');
+
+         // Mostrar el resultado en el textarea de resultado
+         document.getElementById('result').value = combinedList;
+      }
+   </script>
+</body>
+
+</html>
